@@ -5,7 +5,7 @@ class Room < ActiveRecord::Base
 set_primary_key :ref
 validates :ref, :presence=>true, :uniqueness=>true
 belongs_to :host, :class_name=>"Host", :foreign_key=>"host_ref"
-#has_many :bookings, :class_name=>"Booking",:foreign_key=>'room_ref'
+has_many :bookings, :class_name=>"Booking",:foreign_key=>'room_ref'
 
 
 def self.import(file)

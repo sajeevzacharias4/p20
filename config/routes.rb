@@ -1,4 +1,9 @@
 P20::Application.routes.draw do
+   resources :bookings do
+    collection { post :import }
+  end
+
+
  resources :rooms do
     collection { post :import }
   end

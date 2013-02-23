@@ -1,11 +1,10 @@
 require 'csv'
-class Room < ActiveRecord::Base
-  attr_accessible :capacity, :host_ref, :ref
+class Booking < ActiveRecord::Base
+  attr_accessible :end_date, :number_of_guests, :ref, :room_ref, :start_date
 
 set_primary_key :ref
 validates :ref, :presence=>true, :uniqueness=>true
-belongs_to :host, :class_name=>"Host", :foreign_key=>"host_ref"
-#has_many :bookings, :class_name=>"Booking",:foreign_key=>'room_ref'
+belongs_to :room, :class_name=>"Room", :foreign_key=>"room_ref"
 
 
 def self.import(file)
@@ -16,16 +15,17 @@ additional_rows_to_skip = 1
  if additional_rows_to_skip > 0
 additional_rows_to_skip-=1
 else
- p = Room.create!({
+ p = Booking.create!({
           :ref => row[0],
-          :host_ref => row[1],
-          :capacity => row[2],
+          :room_ref => row[1],
+          :start_date => row[2],
+	:end_date => row[2],
+	:number_of_guests =>row[3],
         }
       )
   end
 end
-#Host.delete_all("ref='ref'")
-end
 
+end
 
 end

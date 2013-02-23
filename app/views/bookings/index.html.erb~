@@ -1,0 +1,44 @@
+
+<h1>Bookings</h1><br />
+
+<%= link_to 'New Booking', new_booking_path %>
+
+
+
+<h2>Import Bookings</h2>
+<%= form_tag import_bookings_path, :multipart=> true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import" %>
+<% end %>
+<br />
+<h1>Listing bookings</h1>
+
+<table>
+  <tr>
+    <th>Ref</th>
+    <th>Room ref</th>
+    <th>Start date</th>
+    <th>End date</th>
+    <th>Number of guests</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @bookings.each do |booking| %>
+  <tr>
+    <td><%= booking.ref %></td>
+    <td><%= booking.room_ref %></td>
+    <td><%= booking.start_date %></td>
+    <td><%= booking.end_date %></td>
+    <td><%= booking.number_of_guests %></td>
+    <td><%= link_to 'Show', booking %></td>
+    <td><%= link_to 'Edit', edit_booking_path(booking) %></td>
+    <td><%= link_to 'Destroy', booking, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Booking', new_booking_path %>
